@@ -1,9 +1,12 @@
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style.css">
 <title>Match List</title>
 </head>
 <body>
-<h1>Match List</h1>
+<?include 'header.php'?>
+<div id='title'>Match List</div>
+<h3><a href="addMatches.php">Add Matches</a></h3>
 <table border="1" style="text-align: center">
 <caption>Match List</caption>
 <tr><th>Match Type</th><th>Match #</th><th>Match Time</th><th>Blue Score</th><th>Red Score</th><th>Teams</th></tr>
@@ -82,8 +85,8 @@
 		if(!$teamdata){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
 		while(($curRow2=mysql_fetch_array($teamdata)))
 		{
-			if($curRow2['teamColor']=="B")	echo "<td style='background-color: #000080; color:white; font-weight:bold;'>";
-			else	echo "<td style='background-color: #8B0000; color:white;font-weight:bold;'>";
+			if($curRow2['teamColor']=="B")	echo "<td class='blueteam'>";
+			else	echo "<td class='redteam'>";
 			echo "$curRow2[teamNum]</td>";
 		}
 		echo "<td><a href='editMatchResult.php?matchNum=$curRow[matchNum]&matchType=$curRow[matchType]'>view</a></tr>";	
@@ -91,6 +94,6 @@
 	
 ?>
 </table>
-<?php include 'footer.php';?>
+<?include 'footer.php';?>
 </body>
 </html>

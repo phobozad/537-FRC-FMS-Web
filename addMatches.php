@@ -11,9 +11,13 @@
 	$matchType=$_REQUEST['matchType'];
 ?>
 <html>
-<head><title>Add Matches</title></head>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Add Matches</title>
+</head>
 <body>
-<h1>Add matches</h1>
+<?include 'header.php'?>
+<div id='title'>Add matches</div>
 <form method="post">
 <!--Preview-->
 
@@ -27,9 +31,9 @@ if($action=="preview")
 	for($i=0;$i<$maxI;$i++)
 	{
 		if($i<($maxI/2))
-			echo "<th style='background-color:red; color:white;'>Red ".($i+1)."</th>";
+			echo "<th class='redteam'>Red ".($i+1)."</th>";
 		else
-			echo "<th style='background-color:blue; color:white;'>Blue ".($i-($maxI/2)+1)."</th>";
+			echo "<th class='blueteam'>Blue ".($i-($maxI/2)+1)."</th>";
 	}
 	echo "</tr>";
 	$icount=(count($lines));
@@ -127,14 +131,17 @@ else
 		<option value="Q">Qualifying</option>
 		<option value="E">Elimination</option>
 	</select>
-	Output from matchmaker (sparse): <br><textarea name='data'>1 1675 0 4174 0 2194 0 4095 0 1714 0 2506 0
+	<br><br>
+	Output from matchmaker (sparse): <br>
+	<textarea name='data' style='width: 700px; height: 200px'>1 1675 0 4174 0 2194 0 4095 0 1714 0 2506 0
 2 967 0 4371 0 93 0 706 0 868 0 2115 0
-3 269 0 3184 0 1091 0 4247 0 171 0 1736 0</textarea> <br>
-	<input type='hidden' name='action' value='preview'><input type='submit' value='Preview'>
+3 269 0 3184 0 1091 0 4247 0 171 0 1736 0</textarea>
+	<br><br><input type='hidden' name='action' value='preview'>
+	<input type='submit' value='Preview'>
 <?
 }
 ?>
 </form>
-<?php include 'footer.php';?>
+<?include 'footer.php';?>
 </body>
 </html>

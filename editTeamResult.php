@@ -50,23 +50,25 @@
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style.css">
 <title>Edit Team Result</title>
 </head>
 <body>
-<h1>Edit Team Result for Team <?php echo "$teamNum in $matchTypeLong Match $matchNum";?></h1>
-<h4><a href="editMatchResult.php?matchNum=<?=$matchNum?>&matchType=<?=$matchType?>">Back to Match Result</a></h3>
+<?include 'header.php'?>
+<div id='title'>Edit Team Result for Team <?php echo "$teamNum in $matchTypeLong Match $matchNum";?></div>
+<h3><a href="editMatchResult.php?matchNum=<?=$matchNum?>&matchType=<?=$matchType?>">Back to Match Result</a></h3>
 <form method="post">
 Color: <select name="teamColor">
-<option value="B" <?php if($teamColor=="B") echo "selected";?>>Blue</option>
-<option value="R" <?php if($teamColor=="R") echo "selected";?>>Red</option>
+<option class="blueteam" value="B" <?php if($teamColor=="B") echo "selected";?>>Blue</option>
+<option class="redteam" value="R" <?php if($teamColor=="R") echo "selected";?>>Red</option>
 </select> <br>
 Position: <input name="teamPosition" type="text" value="<?=$teamPosition?>"> <br>
 Penalty: <input name="teamPenalty" type="text" value="<?=$teamPenalty?>"> <br>
 Red Card: <input name="teamRedCard" type="text" value="<?=$teamRedCard?>"> <br> 
-Yellow Card: <input name="teamYellowCard" type="text" value="<?=$teamYellowCard?>"> <br>
+Yellow Card: <input name="teamYellowCard" type="text" value="<?=$teamYellowCard?>">
 <input type="hidden" name="action" value="update">
-<input type="submit" value="Save">
+<br><br><input type="submit" value="Save">
 </form>
-<?php include 'footer.php';?>
+<?include 'footer.php';?>
 </body>
 </html>

@@ -1,9 +1,11 @@
 <html>
 <head>
-<title>Team 537 FMS</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Home</title>
 </head>
 <body>
-<h1>Team 537 FMS</h1>
+<?include 'header.php'?>
+<div id='title'>Home</div>
 <a href="addTeam.php">Add Teams</a><br>
 <a href="addMatches.php">Add Matches</a><br>
 <a href="viewMatchList.php">View Match List</a><br>
