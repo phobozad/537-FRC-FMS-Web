@@ -65,6 +65,6 @@ Sponsers: <input name="teamSponsers" type="text" value="<?=$teamSponsers?>"><br>
 	}
 ?>
 </table>
-<h4><a href='addteam.php'>Add Team</a></h4>
+<?php include 'footer.php';?>
 </body>
 </html>

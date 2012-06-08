@@ -53,5 +53,6 @@ Sponsers: <input name="sponsers" type="text"><br>
 	}
 ?>
 </table>
+<?php include 'footer.php';?>
 </body>
 </html>

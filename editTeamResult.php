@@ -3,8 +3,10 @@
 	mysql_connect("$host","$ln","$pw") or die("Unable to connect to database");
 	mysql_select_db("$db") or die("Unable to select database");
 	
-	$id=mysql_real_escape_string($_REQUEST['id']);
-
+	$matchType=mysql_real_escape_string($_REQUEST['matchType']);
+	$matchNum=mysql_real_escape_string($_REQUEST['matchNum']);
+	$teamNum=mysql_real_escape_string($_REQUEST['teamNum']);
+	
 	if($_REQUEST['action']=='update')
 	{
 		$teamColor=mysql_real_escape_string($_REQUEST['teamColor']);
@@ -12,12 +14,12 @@
 		$teamPenalty=mysql_real_escape_string($_REQUEST['teamPenalty']);
 		$teamRedCard=mysql_real_escape_string($_REQUEST['teamRedCard']);
 		$teamYellowCard=mysql_real_escape_string($_REQUEST['teamYellowCard']);
-		$qry="UPDATE teamresult SET teamColor='$teamColor', teamPosition='$teamPosition', teamPenalty='$teamPenalty', teamRedCard='$teamRedCard', teamYellowCard='$teamYellowCard' WHERE ID='$id'";
+		$qry="UPDATE teamresult SET teamColor='$teamColor', teamPosition='$teamPosition', teamPenalty='$teamPenalty', teamRedCard='$teamRedCard', teamYellowCard='$teamYellowCard' WHERE matchType='$matchType' AND matchNum='$matchNum' AND teamNum='$teamNum'";
 		$res=mysql_query($qry);
 		if(!$res){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
 	}
 		
-	$qry="SELECT teamColor, teamPosition, teamPenalty, teamRedCard, teamYellowCard,matchNum,matchType,teamNum FROM teamresult where id='$id'";
+	$qry="SELECT teamColor, teamPosition, teamPenalty, teamRedCard, teamYellowCard,matchNum,matchType,teamNum FROM teamresult WHERE matchType='$matchType' AND matchNum='$matchNum' AND teamNum='$teamNum'";
 	$res=mysql_query($qry);
 	if(!$res){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
 	else
@@ -65,5 +67,6 @@ Yellow Card: <input name="teamYellowCard" type="text" value="<?=$teamYellowCard?
 <input type="hidden" name="action" value="update">
 <input type="submit" value="Save">
 </form>
+<?php include 'footer.php';?>
 </body>
 </html>

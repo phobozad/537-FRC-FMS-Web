@@ -59,6 +59,12 @@ if($action=="preview")
 }
 else if($action=="add")
 {
+	
+	$qry="START TRANSACTION";
+	$sqlerror=false;
+	$res=mysql_query($qry);
+	if(!$res){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';$sqlerror=true;}
+	
 	$lines=explode("\r\n",$data);
 	$icount=(count($lines)-1);
 	for ($i=0;$i<=$icount;$i++)
@@ -71,7 +77,7 @@ else if($action=="add")
 		
 		$qry="INSERT INTO matchtime (matchTime,matchNum,matchType) VALUES ('$matchTime','$curline[0]','$matchType')";
 		$res=mysql_query($qry);
-		if(!$res){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
+		if(!$res){echo "<font color='red'><b>".mysql_error().": $qry</b></font><br>";$sqlerror=true;}
 		
 		for ($j=1;$j<=$jcount;$j+=2)
 		{
@@ -89,12 +95,26 @@ else if($action=="add")
 			
 			
 			$qry="INSERT INTO teamresult (matchType,matchNum,teamNum,teamColor,teamPosition) VALUES ('$matchType','$curline[0]','$curline[$j]','$teamColor','$teamPosition')";
-			echo $qry."<br>";
 			$res=mysql_query($qry);
-			if(!$res){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
+			if(!$res){echo "<font color='red'><b>".mysql_error().": $qry</b></font><br>";$sqlerror=true;}
 		}
 		echo "</tr>";
 	}
+	if($sqlerror==true)
+	{
+		$qry="ROLLBACK";
+		$res=mysql_query($qry);
+		if(!$res){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
+		echo "<a href='javascript:history.back()'>Back</a>";
+	}
+	else
+	{
+		$qry="COMMIT";
+		$res=mysql_query($qry);
+		if(!$res){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
+		echo "<a href='viewMatchList.php'>View Match List</a>";
+	}
+	
 }
 else
 {
@@ -115,5 +135,6 @@ else
 }
 ?>
 </form>
+<?php include 'footer.php';?>
 </body>
 </html>

@@ -27,8 +27,8 @@
 	group by matchtime.matchType,matchtime.matchNum;
 	*/
 	$qry="select matchtime.matchType,matchtime.matchNum,matchtime.matchTime
-from teamresult,matchtime
-group by matchtime.matchType,matchtime.matchNum;";
+			from matchtime
+			group by matchtime.matchType,matchtime.matchNum;";
 	/*
 	select matchtime.matchType,matchtime.matchNum,redRawScore+redBonus-(select SUM(teamPenalty) from fms.teamresult
 	WHERE
@@ -47,20 +47,28 @@ group by matchtime.matchType,matchtime.matchNum;";
 	if(!$matchdata){echo '<font color="red"><b>'.mysql_error().'</b></font><br>';}
 	while(($curRow=mysql_fetch_array($matchdata)))
 	{
+		// Write out match type, match number, match time
 		echo "<tr><td>$curRow[matchType]</td><td>$curRow[matchNum]</td><td>".date_create($curRow['matchTime'])->format("g:ia")."</td>";
 		
-		$qry="select matchtime.matchType,matchtime.matchNum,redRawScore+redBonus-(select SUM(teamPenalty) from fms.teamresult
-		WHERE
-		teamresult.matchType=matchtime.matchType AND
-		teamresult.matchNum=matchtime.matchNum AND
-		teamColor='R') as redScore,
-		blueRawScore+blueBonus-(select SUM(teamPenalty) from fms.teamresult
-		WHERE
-		teamresult.matchType=matchtime.matchType AND
-		teamresult.matchNum=matchtime.matchNum AND
-		teamColor='B') as blueScore
+		//Get the data for this match
+		$qry="select matchtime.matchType,matchtime.matchNum,redRawScore+redBonus-IFNULL(
+			(select SUM(teamPenalty) from teamresult
+				WHERE
+				teamresult.matchType=matchtime.matchType AND
+				teamresult.matchNum=matchtime.matchNum AND
+				teamColor='R')
+		,0)
+		as redScore,
+		blueRawScore+blueBonus-IFNULL(
+			(select SUM(teamPenalty) from teamresult
+				WHERE
+				teamresult.matchType=matchtime.matchType AND
+				teamresult.matchNum=matchtime.matchNum AND
+				teamColor='B')
+		,0)
+		AS blueScore
 		from matchtime,matchresult
-		where matchtime.matchType='$curRow[matchType]' AND matchtime.matchNum=$curRow[matchNum];";
+		where matchresult.matchType='$curRow[matchType]' AND matchresult.matchNum='$curRow[matchNum]';";
 		
 		
 		$res=mysql_query($qry);
@@ -83,4 +91,6 @@ group by matchtime.matchType,matchtime.matchNum;";
 	
 ?>
 </table>
+<?php include 'footer.php';?>
+</body>
 </html>
