@@ -42,3 +42,9 @@ div#title
 	text-decoration: none;
 	font-weight:bold;
 }
+
+body
+{
+	background:url('img/bg.png') no-repeat center center fixed;
+	background-size:cover;
+}
