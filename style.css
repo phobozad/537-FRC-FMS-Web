@@ -43,7 +43,7 @@ div#title
 	font-weight:bold;
 }
 
-body
+html
 {
 	background:url('img/bg.png') no-repeat center center fixed;
 	background-size:cover;

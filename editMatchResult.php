@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 	require 'dbinfo.php';
 	mysql_connect("$host","$ln","$pw") or die("Unable to connect to database");

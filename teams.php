@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 	require 'dbinfo.php';
 	mysql_connect("$host","$ln","$pw") or die("Unable to connect to database");
@@ -67,7 +68,7 @@ Team Name: <input name="teamName" type="text" value="<?=$teamName?>"><br>
 Hometown: <input name="teamHometown" type="text" value="<?=$teamHometown?>"><br>
 School: <input name="teamSchool" type="text" value="<?=$teamSchool?>"><br>
 Rookie Year: <input name="teamRookieYear" type="text" value="<?=$teamRookieYear?>"><br>
-Sponsers: <input name="teamSponsers" type="text" value="<?=$teamSponsers?>">
+Sponsers: <input name="teamSponsers" type="text" style="width: 400px" value="<?=$teamSponsers?>">
 <input type="hidden" name="action" value="update">
 <br><br><input type="submit" value="Add/Save"><input type="button" value="New" onclick="edit('')">
 </form>
