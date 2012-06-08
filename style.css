@@ -35,3 +35,10 @@ div#title
 	color:white;
 	font-weight:bold;
 }
+
+.deletelink
+{
+	color:red;
+	text-decoration: none;
+	font-weight:bold;
+}

@@ -82,7 +82,7 @@ Sponsers: <input name="teamSponsers" type="text" value="<?=$teamSponsers?>">
 	{
 		while(($curRow=mysql_fetch_array($res)))
 		{
-			echo "<tr><td>$curRow[teamNum]</td><td>$curRow[teamName]</td><td><a href='javascript:edit($curRow[teamNum])'>edit</a><td><a href='javascript:del($curRow[teamNum])'>x</a></tr>";
+			echo "<tr><td><a href='javascript:edit($curRow[teamNum])'>$curRow[teamNum]</a></td><td><a href='javascript:edit($curRow[teamNum])'>$curRow[teamName]</a></td><td style='border: 0'><a href='javascript:del($curRow[teamNum])' class='deletelink'>X</a></tr>";
 		}
 	}
 ?>
